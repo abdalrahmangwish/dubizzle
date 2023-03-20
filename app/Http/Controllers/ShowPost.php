@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
-use App\Traits\showElments;
-use App\Trait\Response_Trait;
+use App\Traits\showElments as TraitsShowElments;
+use Illuminate\Http\ResponseTrait;
 
-class PostController extends Controller
+class ShowPost extends Controller
 {
-    use Response_Trait;
 
-///--> this is  without login-> evrey sho whithout login
-
-    use showElments;
+    use ResponseTrait;
+    use TraitsShowElments;
     public function getProperty()
     {
         $posts = $this->getData(Post::class);
@@ -26,5 +23,4 @@ class PostController extends Controller
         $list = $posts->postType->communities->jobs;
         return $this->get_response($list, 200, 'this is the jobs list');
     }
-
 }
